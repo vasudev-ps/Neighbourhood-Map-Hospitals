@@ -1,0 +1,99 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Neighbourhood MAP</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="img/favicon.png" sizes="16x16">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div id="map" data-bind="click:mapNav"></div>
+    <span class="hamburger" data-bind="click:toggleNav">&#9776;</span>
+    <div id="Nav" class="nav">
+        <a href="javascript:void(0)" class="closebtn" data-bind="click:toggleNav">&times;</a>
+        <div class="nav-content-title">
+            <div class="nav-title">Neighbourhood <span>MAP</span> </div>
+                <span class ="nav-subtitle">Find your nearest Hospitals</span>
+                <hr>
+            </div>
+
+            <div class="nav-content">
+                <br>
+                    <div class="services">
+                    <div class="serviceInfo">
+                        <span>Select the distance to filter the markers here <strong>&#11015;</strong></span>
+                    </div>
+                    <!--Filters the markers on the basis of distance from selected city -->
+                    <div class="filter">
+                        <select id="filter"     data-bind = "value: selectedFilter,
+                                            options:        markerFilters,
+                                            optionsText:    'name',
+                                            optionsValue:   'Id',
+                                            optionsCaption: '-- Select filter --',
+                                            event: { change: removeList }">
+                        </select>
+                    </div>
+                </div>
+                <!--Markers list section binded with knockout data-bind="click:addMarkerName" -->
+                <div class="markerName">
+                    <div id="markerinfo"><span>Click here to see the Marker list<input id="mark" type="button" value="GO" data-bind="click:addMarkerName" ></span>
+                    </div>
+                    <hr>
+                    <div class="column">
+                        <ul class="markerNames" data-bind="foreach: marker">
+                            <li>
+                                <span data-bind="text: $data"></span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <ul class="markerlinks" data-bind="foreach: marker">
+                            <li>
+                                <button data-bind="value: $index" onClick="infoDisplay(this.value)">see the info</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="input">
+                    <label for="area-text"></label>
+                    <input id="area-text" type="text" placeholder="Enter the city to search.!">
+                    <input id="zoom-to-area" type="button" value="GO" data-bind="click:onWikiclick">
+                    <br>
+                    <hr>
+                    <span class='wikititle'>Some usefull wikipedia links about your search</span>
+                </div>
+                <!--wikipedia list section which shows up on search binded with knockout -->
+                <div id="wikipedia" class="wikipedia">
+                    <div class="column">
+                        <ul class="names" data-bind="foreach: link">
+                            <li class="wikinames">
+                                <span data-bind="text: $data"></span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <ul class="links" data-bind="foreach: src">
+                            <li>
+                                <span><a target="_blank" href="" data-bind = "attr : {href:$data}">visit the page</a></span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--global variable array -->
+        <script>
+            var userLocalAddr = '';
+            var markerName = new Array();
+        </script>
+        <!--all the libraries and js files -->
+        <script src="js/libs/jquery.min.js"></script>
+        <script src="js/libs/knockout-3.4.1.js"></script>
+        <script src="js/map.js"></script>
+        <script src="js/app.js"></script>
+        <script async defer src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyArWW5wQIxDKLTekSa1Jq_XgyKsrikVjDs&v=3&callback=initMap"></script>
+</body>
+
+</html>
