@@ -1,5 +1,5 @@
 # Neighbourhood-Map
-Neighbourhood-Map is a project where users can fetch details of their near-by hospitals.
+Neighbourhood-Map is a project where users can fetch details of their near by hospitals.
 
 ###File Structure
 * css
